@@ -1,0 +1,73 @@
+name: rentalz_gcs18830_flutter
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  get: 4.3.8
+  get_storage: ^2.0.2
+
+  # lottie
+  lottie: ^1.2.1
+  ###
+
+  #font_awesome_flutter
+  font_awesome_flutter: ^9.1.0
+  ###
+
+  #Tuple
+  tuple: ^2.0.0
+  ###
+
+  #Image picker
+  image_picker: ^0.8.0+3
+  ###
+
+  #Svg
+  flutter_svg: ^0.22.0
+  ###
+
+  #Helpers for json models
+  build_runner: ^2.0.4
+  json_serializable: ^4.1.2
+  json_annotation: ^4.0.1
+  ###
+
+  #Animation
+  animations: ^2.0.1
+  ###
+
+  # date time format
+  intl: ^0.17.0
+  ###
+
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  lints: 1.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  #Assets
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/json/
+
+#Flutter gen - image widget gen
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  lineLength: 80 # Optional (default: 80)
+
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+###
