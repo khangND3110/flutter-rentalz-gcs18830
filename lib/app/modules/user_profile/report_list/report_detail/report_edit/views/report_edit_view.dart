@@ -148,7 +148,7 @@ class ReportEditView extends GetView<ReportEditController> {
                       () => CustomButton().buildEnableButton(
                         isButtonEnable: controller.enableButton.value,
                         title: 'Create',
-                        onPresses: controller.enableButton.isTrue ? controller.onCreateHotel : null,
+                        onPresses: controller.enableButton.isTrue ? controller.onEditClick : null,
                       ),
                     ),
                   ],

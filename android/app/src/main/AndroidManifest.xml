@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rentalz.gcs18830.rentalz_gcs18830_flutter">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+
    <application
         android:label="rentalz_gcs18830_flutter"
         android:icon="@mipmap/ic_launcher">

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rentalz_gcs18830_flutter/app/routes/app_pages.dart';
@@ -10,6 +12,26 @@ import '../controllers/user_profile_controller.dart';
 
 class UserProfileView extends GetView<UserProfileController> {
   final List<Tuple3> listFunctions = [
+    Tuple3(
+      'Ring bell',
+      FontAwesomeIcons.bell,
+          () {
+            FlutterRingtonePlayer.playNotification();
+      },
+    ),
+    Tuple3(
+      'Vibration device',
+      FontAwesomeIcons.phone,
+          () {
+            Vibrate.vibrate();
+
+            final Iterable<Duration> pauses = [
+              const Duration(milliseconds: 500),
+              const Duration(milliseconds: 500),
+            ];
+            Vibrate.vibrateWithPauses(pauses);
+      },
+    ),
     Tuple3(
       'Add hotel',
       FontAwesomeIcons.building,
@@ -173,7 +195,7 @@ class UserProfileView extends GetView<UserProfileController> {
       child: Center(
         child: InkWell(
           onTap: () {
-            Get.offAndToNamed(Routes.LOGIN);
+            controller.onUserLogout();
           },
           child: Container(
             padding: EdgeInsets.all(5),

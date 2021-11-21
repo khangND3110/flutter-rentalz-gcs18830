@@ -102,6 +102,18 @@ class HomeDetailView extends GetView<HomeDetailController> {
                       ),
                     ),
                     _buildBookContainer(),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Comments',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    _buildCommentList(),
+                    _buildComment(),
                   ],
                 ),
               ),
@@ -110,6 +122,47 @@ class HomeDetailView extends GetView<HomeDetailController> {
         ),
       ),
     );
+  }
+
+  Widget _buildCommentList() {
+    return Obx(() {
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: controller.commentList.length,
+        itemBuilder: (context, index) {
+          return Container(
+            width: Get.width,
+            padding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
+            margin: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 5,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  controller.commentList[index],
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
   }
 
   Widget _buildHomeDetail() {
@@ -513,5 +566,87 @@ class HomeDetailView extends GetView<HomeDetailController> {
           isSelected: false,
         );
     }
+  }
+
+  Container _buildComment() {
+    TextEditingController? _textController = TextEditingController(text: controller.comment.value);
+    _textController.selection = TextSelection.fromPosition(TextPosition(
+      offset: _textController.text.length,
+    ));
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 8,
+            child: Container(
+              margin: EdgeInsets.only(
+                right: 20,
+              ),
+              height: 60,
+              width: Get.width,
+              padding: EdgeInsets.only(
+                right: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Center(
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    prefixIcon: Icon(
+                      FontAwesomeIcons.facebookMessenger,
+                      color: Colors.black,
+                      size: 18,
+                    ),
+                    hintText: 'Comment',
+                  ),
+                  onChanged: controller.onCommentChanged,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () {
+                    controller.onSendComment();
+                  },
+                  child: Center(
+                    child: Icon(
+                      Icons.messenger,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

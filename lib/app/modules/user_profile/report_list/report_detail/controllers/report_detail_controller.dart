@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:animations/animations.dart';
 import 'package:get/get.dart';
 import 'package:rentalz_gcs18830_flutter/app/data/models/hotel/hotel_list_model.dart';
 import 'package:rentalz_gcs18830_flutter/app/data/models/hotel/hotel_model.dart';
 import 'package:rentalz_gcs18830_flutter/app/data/storage/local_storage_manager.dart';
 import 'package:rentalz_gcs18830_flutter/app/modules/list_home/controllers/list_home_controller.dart';
 import 'package:rentalz_gcs18830_flutter/app/modules/user_profile/report_list/controllers/report_list_controller.dart';
+import 'package:rentalz_gcs18830_flutter/app/widgets/custom_modal_configuration.dart';
+import 'package:rentalz_gcs18830_flutter/app/widgets/dialog_widgets.dart';
 
 class ReportDetailController extends GetxController {
   final houseModel = HotelModel().obs;
@@ -20,6 +23,26 @@ class ReportDetailController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+  }
+
+  void onDeleteClick() {
+    showModal(
+      context: Get.context!,
+      configuration: BlurFadeScaleTransitionConfiguration(barrierDismissible: true),
+      builder: (context) {
+        return DialogWidgets().buildConfirmDialog(
+          title: 'Remove hotel',
+          description: 'Are you sure to remove this hotel?',
+          onNegativeClick: () {
+            Get.back();
+          },
+          onPositiveClick: () {
+            onDeleteHome();
+            Get.back();
+          },
+        );
+      },
+    );
   }
 
   void onDeleteHome() {

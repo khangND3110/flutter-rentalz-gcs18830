@@ -137,19 +137,23 @@ class ReportEditController extends GetxController {
 
   void initValueHouse() {
     ///
-    hotelName.value = houseModel.value.name ?? '';
+    onHotelNameChanged(houseModel.value.name ?? '');
+    hotelNameController.text = houseModel.value.name ?? '';
 
     ///
-    street.value = houseModel.value.street ?? '';
+    onStreetChanged(houseModel.value.street ?? '');
+    streetController.text = houseModel.value.street ?? '';
 
     ///
-    noRoom.value = houseModel.value.noRoom.toString();
+    onNoRoomChanged(houseModel.value.noRoom.toString());
+    noRoomController.text = houseModel.value.noRoom.toString();
 
     ///
-    rentPrice.value = houseModel.value.rentPrice.toString();
+    onRentPriceChanged(houseModel.value.rentPrice.toString());
+    rentPriceController.text = houseModel.value.rentPrice.toString();
 
     ///
-    description.value = houseModel.value.description ?? '';
+    onDesciptionChanged(houseModel.value.description ?? '');
 
     /// city
     var city = cityList.firstWhere((ct) => ct.name == houseModel.value.city);
@@ -322,7 +326,27 @@ class ReportEditController extends GetxController {
     );
   }
 
-  void onCreateHotel() {
+  void onEditClick() {
+    showModal(
+      context: Get.context!,
+      configuration: BlurFadeScaleTransitionConfiguration(barrierDismissible: true),
+      builder: (context) {
+        return DialogWidgets().buildConfirmDialog(
+          title: 'Edit hotel',
+          description: 'Are you sure to edit this hotel?',
+          onNegativeClick: () {
+            Get.back();
+          },
+          onPositiveClick: () {
+            onEditHotel();
+            Get.back();
+          },
+        );
+      },
+    );
+  }
+
+  void onEditHotel() {
     if (enableButton.isTrue) {
       HotelListModel? currentHotelList = LocalStorageManager().getHotelList();
       final amenities = amenityList.where((item) => item.isSelected == true).map((e) => e.id ?? 0).toList();
@@ -341,6 +365,7 @@ class ReportEditController extends GetxController {
         imagePath: imagePath.value,
         amenities: amenities,
         author: userModel,
+        createdAt: houseModel.value.createdAt,
       );
 
       int index = currentHotelList?.hotels?.indexWhere((element) => element.name == houseModel.value.name) ?? 0;

@@ -148,7 +148,7 @@ class AddHotelView extends GetView<AddHotelController> {
                       () => CustomButton().buildEnableButton(
                         isButtonEnable: controller.enableButton.value,
                         title: 'Create',
-                        onPresses: controller.enableButton.isTrue ? controller.onCreateHotel : null,
+                        onPresses: controller.enableButton.isTrue ? controller.onCreateClick : null,
                       ),
                     ),
                   ],

@@ -18,6 +18,7 @@ class HotelModel {
   List<int>? amenities;
   String? houseType;
   UserModel? author;
+  List<String>? comments;
   String? createdAt;
 
   HotelModel({
@@ -34,6 +35,7 @@ class HotelModel {
     this.imagePath,
     this.amenities,
     this.author,
+    this.comments,
     this.createdAt,
   });
 

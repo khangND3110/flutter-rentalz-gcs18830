@@ -343,7 +343,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
             child: _buildButtonRadius(
               icon: FontAwesomeIcons.trashAlt,
               onTap: () {
-                controller.onDeleteHome();
+                controller.onDeleteClick();
               },
               color: Colors.black,
             ),

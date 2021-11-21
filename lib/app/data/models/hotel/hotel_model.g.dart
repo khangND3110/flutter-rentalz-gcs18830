@@ -24,6 +24,8 @@ HotelModel _$HotelModelFromJson(Map<String, dynamic> json) {
     author: json['author'] == null
         ? null
         : UserModel.fromJson(json['author'] as Map<String, dynamic>),
+    comments:
+        (json['comments'] as List<dynamic>?)?.map((e) => e as String).toList(),
     createdAt: json['createdAt'] as String?,
   );
 }
@@ -43,5 +45,6 @@ Map<String, dynamic> _$HotelModelToJson(HotelModel instance) =>
       'amenities': instance.amenities,
       'houseType': instance.houseType,
       'author': instance.author,
+      'comments': instance.comments,
       'createdAt': instance.createdAt,
     };

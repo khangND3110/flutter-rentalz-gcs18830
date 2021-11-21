@@ -270,6 +270,26 @@ class AddHotelController extends GetxController {
     );
   }
 
+  void onCreateClick() {
+    showModal(
+      context: Get.context!,
+      configuration: BlurFadeScaleTransitionConfiguration(barrierDismissible: true),
+      builder: (context) {
+        return DialogWidgets().buildConfirmDialog(
+          title: 'Create Hotel',
+          description: 'Are you sure to create this hotel?',
+          onNegativeClick: () {
+            Get.back();
+          },
+          onPositiveClick: () {
+            onCreateHotel();
+            Get.back();
+          },
+        );
+      },
+    );
+  }
+
   void onCreateHotel() async {
     if(enableButton.isTrue) {
       await initializeDateFormatting('vi-VN', null);

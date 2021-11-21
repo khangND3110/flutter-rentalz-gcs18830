@@ -10,40 +10,44 @@ class DialogWidgets {
     return Dialog(
       backgroundColor: Colors.white,
       child: Container(
-        child: Column(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 80.0,
-              width: 150.0,
+              height: 100.0,
+              width: 50.0,
               margin: EdgeInsets.only(top: 15.0),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12.0),
                   onTap: onUpload,
-                  child: _buildItemImagePicker(
-                    icon: FontAwesomeIcons.fileUpload,
-                    // Assets.icons.icUploadPhoto,
-                    title: 'Chọn ảnh từ thiết bị',
+                  child: Center(
+                    child: _buildItemImagePicker(
+                      icon: FontAwesomeIcons.fileUpload,
+                      // Assets.icons.icUploadPhoto,
+                      title: 'Gallery',
+                    ),
                   ),
                 ),
               ),
             ),
             Container(
-              height: 80.0,
-              width: 150.0,
+              height: 100.0,
+              width: 50.0,
               margin: EdgeInsets.only(top: 15.0),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12.0),
                   onTap: onTakePhoto,
-                  child: _buildItemImagePicker(
-                    icon: Icons.camera_alt_outlined,
-                    title: 'Chụp ảnh mới',
+                  child: Center(
+                    child: _buildItemImagePicker(
+                      icon: Icons.camera_alt_outlined,
+                      title: 'Device',
+                    ),
                   ),
                 ),
               ),
@@ -72,6 +76,99 @@ class DialogWidgets {
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildConfirmDialog({
+    required String title,
+    required String description,
+    required VoidCallback onNegativeClick,
+    required VoidCallback onPositiveClick,
+  }) {
+    return Dialog(
+      backgroundColor: Colors.white,
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 10,
+              ),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 30,
+              ),
+              child: Text(
+                description,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: CustomColors.grey,
+                    ),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: onNegativeClick,
+                        child: Center(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: onPositiveClick,
+                        child: Center(
+                          child: Text(
+                            'Ok',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
